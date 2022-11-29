@@ -5,6 +5,12 @@ function buscaCep() {
    let inputCep = document.querySelector('input\[name=cep\]');
    let cep = inputCep.value.replace('-', '');
    let url = `https://viacep.com.br/ws/${cep}/json`;
-
-   console.log("🚀 ~ file: app.js:9 ~ buscaCep ~ url", url)
+   let xhr = new XMLHttpRequest();
+   xhr.open('GET', url, true);
+   xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+         console.log(JSON.parse(xhr.responseText));
+      }
+   }
+   xhr.send();
 }
